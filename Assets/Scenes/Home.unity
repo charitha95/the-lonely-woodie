@@ -24428,7 +24428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7954613771136899760, guid: 5315ad0cf69571d42baa6b45b04683f9, type: 3}
       propertyPath: transitionTime
-      value: 3
+      value: 1.88
       objectReference: {fileID: 0}
     - target: {fileID: 9171261146884317812, guid: 5315ad0cf69571d42baa6b45b04683f9, type: 3}
       propertyPath: m_RootOrder

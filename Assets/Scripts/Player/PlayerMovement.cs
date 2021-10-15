@@ -12,6 +12,20 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private bool crouch = false;
 
+    private Rigidbody2D player;
+    private Animator anim;
+
+    private enum MovementState
+    {
+        idle, running, jumping, falling
+    };
+
+    private void Start()
+    {
+        player = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -22,14 +36,10 @@ public class PlayerMovement : MonoBehaviour
             jump = true;
         }
 
-        //if (Input.GetButtonDown("Crouch"))
-        //{
-        //    crouch = true;
-        //}
-        //else if (Input.GetButtonUp("Crouch"))
-        //{
-        //    crouch = false;
-        //}
+        float dirX = Input.GetAxisRaw("Horizontal");
+
+        //playerMovement(dirX);
+        UpdateAnimationState(dirX);
     }
 
     private void FixedUpdate()
@@ -37,5 +47,34 @@ public class PlayerMovement : MonoBehaviour
         // Move our character
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
+    }
+
+    private void UpdateAnimationState(float dirX)
+    {
+        MovementState state;
+        if (dirX > 0f)
+        {
+            state = MovementState.running;
+        }
+        else if (dirX < 0f)
+        {
+            state = MovementState.running;
+        }
+        else
+        {
+            state = MovementState.idle;
+        }
+
+        if (player.velocity.y > 1.5f)
+        {
+            state = MovementState.jumping;
+        }
+        else if (player.velocity.y < -1.5f)
+        {
+            state = MovementState.falling;
+        }
+
+        anim.SetInteger("movement",
+                ((int)state));
     }
 }
