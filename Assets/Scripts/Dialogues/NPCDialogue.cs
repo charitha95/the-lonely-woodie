@@ -10,7 +10,7 @@ public class NPCDialogue : MonoBehaviour
 
     private SpriteRenderer spr;
     private new CapsuleCollider2D collider;
-    private AudioSource audio;
+    private new AudioSource audio;
 
     private void Awake()
     {

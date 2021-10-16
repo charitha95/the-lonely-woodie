@@ -22,13 +22,17 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip[] fallSounds;
     public float Timer;
 
+    public bool isDance;
+    private new CapsuleCollider2D collider;
+
     private enum MovementState
     {
-        idle, running, jumping, falling
+        idle, running, jumping, falling, dancing
     };
 
     private void Start()
     {
+        collider = GetComponent<CapsuleCollider2D>();
         player = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -49,30 +53,45 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimationState(dirX);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("End") == true)
+        {
+            Debug.Log("came to end");
+            isDance = true;
+        }
+    }
+
     private void FixedUpdate()
     {
         // Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
-        jump = false;
+        if (!isDance)
+        {
+            controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+            jump = false;
+        }
     }
 
     private void UpdateAnimationState(float dirX)
     {
         MovementState state;
 
-        if (dirX > 0f)
+        if (dirX > 0f && controller.m_Grounded)
         {
             state = MovementState.running;
             PlayRandomFootsteps();
         }
-        else if (dirX < 0f)
+        else if (dirX < 0f && controller.m_Grounded)
         {
             state = MovementState.running;
             PlayRandomFootsteps();
         }
         else
         {
-            state = MovementState.idle;
+            if (controller.m_Grounded)
+                state = MovementState.idle;
+            else
+                state = MovementState.falling;
         }
 
         if (player.velocity.y > 1.5f)
@@ -84,6 +103,11 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.falling;
             PlayRandomFallSounds();
+        }
+
+        if (isDance)
+        {
+            state = MovementState.dancing;
         }
 
         anim.SetInteger("movement",

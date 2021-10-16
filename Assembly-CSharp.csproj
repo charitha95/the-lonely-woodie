@@ -64,6 +64,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
     <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
+    <Compile Include="Assets\Scripts\Dialogues\NPCDialogue.cs" />
     <Compile Include="Assets\UI\Scripts\AutoZoomIn.cs" />
     <Compile Include="Assets\2D Assets\Scripts\CamerController.cs" />
     <Compile Include="Assets\Scripts\Camera\ParallaxLayer.cs" />
@@ -103,7 +104,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
-    <Compile Include="Assets\Scripts\Dialogues\NPCDialogue.cs" />
+    <Compile Include="Assets\Scripts\Dialogues\NPCNoParticleDialogue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
