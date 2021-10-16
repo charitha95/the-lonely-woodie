@@ -15,6 +15,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D player;
     private Animator anim;
 
+    public AudioSource playerAudioSource;
+    public float footstepsSpeed;
+    public AudioClip[] footsteps;
+    public AudioClip[] jumpSounds;
+    public AudioClip[] fallSounds;
+    public float Timer;
+
     private enum MovementState
     {
         idle, running, jumping, falling
@@ -52,13 +59,16 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimationState(float dirX)
     {
         MovementState state;
+
         if (dirX > 0f)
         {
             state = MovementState.running;
+            PlayRandomFootsteps();
         }
         else if (dirX < 0f)
         {
             state = MovementState.running;
+            PlayRandomFootsteps();
         }
         else
         {
@@ -68,13 +78,45 @@ public class PlayerMovement : MonoBehaviour
         if (player.velocity.y > 1.5f)
         {
             state = MovementState.jumping;
+            PlayRandomJumpSounds();
         }
         else if (player.velocity.y < -1.5f)
         {
             state = MovementState.falling;
+            PlayRandomFallSounds();
         }
 
         anim.SetInteger("movement",
                 ((int)state));
+    }
+
+    private void PlayRandomFootsteps()
+    {
+        if (Time.time > Timer && controller.m_Grounded)
+        {
+            Timer = Time.time + 1 / footstepsSpeed;
+            AudioClip clip = footsteps[Random.Range(0, footsteps.Length)];
+            playerAudioSource.PlayOneShot(clip);
+        }
+    }
+
+    private void PlayRandomJumpSounds()
+    {
+        if (Time.time > Timer && !controller.m_Grounded)
+        {
+            Timer = Time.time + 1 / 1.5f;
+            AudioClip clip = jumpSounds[Random.Range(0, jumpSounds.Length)];
+            playerAudioSource.PlayOneShot(clip);
+        }
+    }
+
+    private void PlayRandomFallSounds()
+    {
+        if (Time.time > Timer && !controller.m_Grounded)
+        {
+            Timer = Time.time + 1 / 1;
+            AudioClip clip = fallSounds[Random.Range(0, fallSounds.Length)];
+            playerAudioSource.PlayOneShot(clip);
+        }
     }
 }
