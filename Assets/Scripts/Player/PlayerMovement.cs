@@ -20,14 +20,15 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip[] footsteps;
     public AudioClip[] jumpSounds;
     public AudioClip[] fallSounds;
+    public AudioClip[] fightSounds;
     public float Timer;
 
     public bool isDance;
     private new CapsuleCollider2D collider;
 
-    private enum MovementState
+    public enum MovementState
     {
-        idle, running, jumping, falling, dancing
+        idle, running, jumping, falling, dancing, attack
     };
 
     private void Start()
@@ -105,6 +106,11 @@ public class PlayerMovement : MonoBehaviour
             PlayRandomFallSounds();
         }
 
+        if (Input.GetMouseButtonDown(0) && controller.m_Grounded)
+        {
+            state = MovementState.attack;
+            PlayRandomFightSounds();
+        }
         if (isDance)
         {
             state = MovementState.dancing;
@@ -142,5 +148,11 @@ public class PlayerMovement : MonoBehaviour
             AudioClip clip = fallSounds[Random.Range(0, fallSounds.Length)];
             playerAudioSource.PlayOneShot(clip);
         }
+    }
+
+    private void PlayRandomFightSounds()
+    {
+        AudioClip clip = fightSounds[Random.Range(0, fightSounds.Length)];
+        playerAudioSource.PlayOneShot(clip);
     }
 }
