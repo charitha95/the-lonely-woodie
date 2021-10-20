@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NPCNoParticleDialogue : MonoBehaviour
 {
@@ -32,5 +33,6 @@ public class NPCNoParticleDialogue : MonoBehaviour
         countText.text = "3/3";
         yield return new WaitForSeconds(audio.clip.length);
         Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

@@ -33657,6 +33657,11 @@ MonoBehaviour:
   fallSounds:
   - {fileID: 8300000, guid: 10650210376daa94cb0fdd9d80b2e63e, type: 3}
   - {fileID: 8300000, guid: bc805348157476c4a8f5d06e7751da74, type: 3}
+  fightSounds:
+  - {fileID: 8300000, guid: e655b7d236e70f448a537c395b0e35f8, type: 3}
+  - {fileID: 8300000, guid: 807107baa539fc74a8d7ddfca146a9cd, type: 3}
+  - {fileID: 8300000, guid: 387b4413ccdbe724caecee1599193ff3, type: 3}
+  - {fileID: 8300000, guid: 623a115fcdf763a4f9e510b4a42c8eb2, type: 3}
   Timer: 0
   isDance: 0
 --- !u!212 &1871488781

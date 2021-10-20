@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isDance;
     private new CapsuleCollider2D collider;
+    private bool airFight = false;
 
     public enum MovementState
     {
@@ -77,6 +78,10 @@ public class PlayerMovement : MonoBehaviour
     {
         MovementState state;
 
+        if (controller.m_Grounded)
+        {
+            airFight = false;
+        }
         if (dirX > 0f && controller.m_Grounded)
         {
             state = MovementState.running;
@@ -95,19 +100,20 @@ public class PlayerMovement : MonoBehaviour
                 state = MovementState.falling;
         }
 
-        if (player.velocity.y > 1.5f)
+        if (player.velocity.y > 1.5f && !airFight)
         {
             state = MovementState.jumping;
             PlayRandomJumpSounds();
         }
-        else if (player.velocity.y < -1.5f)
+        else if (player.velocity.y < -1.5f && !airFight)
         {
             state = MovementState.falling;
             PlayRandomFallSounds();
         }
 
-        if (Input.GetMouseButtonDown(0) && controller.m_Grounded)
+        if (Input.GetMouseButtonDown(0))
         {
+            airFight = true;
             state = MovementState.attack;
             PlayRandomFightSounds();
         }
@@ -152,7 +158,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayRandomFightSounds()
     {
-        AudioClip clip = fightSounds[Random.Range(0, fightSounds.Length)];
-        playerAudioSource.PlayOneShot(clip);
+        if (fightSounds.Length != 0)
+        {
+            AudioClip clip = fightSounds[Random.Range(0, fightSounds.Length)];
+            playerAudioSource.PlayOneShot(clip);
+        }
     }
 }
