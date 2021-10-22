@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("End") == true)
         {
-            Debug.Log("came to end");
             isDance = true;
         }
     }

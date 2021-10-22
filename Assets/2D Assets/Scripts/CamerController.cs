@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CamerController : MonoBehaviour {
+public class CamerController : MonoBehaviour
+{
     public float speed;
     public float clampLeft;
     public float clampRight;
@@ -10,13 +11,14 @@ public class CamerController : MonoBehaviour {
     private float cameraX;
 
     // Use this for initialization
-    void Start () {
+    private void Start()
+    {
         cameraX = transform.position.x;
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
         if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < clampRight)
         {
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
@@ -27,7 +29,7 @@ public class CamerController : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.Space))
         {
-            Debug.Log(cameraX);
+            //Debug.Log(cameraX);
         }
     }
 }
