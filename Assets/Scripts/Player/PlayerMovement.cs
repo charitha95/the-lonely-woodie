@@ -99,12 +99,12 @@ public class PlayerMovement : MonoBehaviour
                 state = MovementState.falling;
         }
 
-        if (player.velocity.y > 1.5f && !airFight)
+        if (player.velocity.y > 1.5f && !airFight && !controller.m_Grounded)
         {
             state = MovementState.jumping;
             PlayRandomJumpSounds();
         }
-        else if (player.velocity.y < -1.5f && !airFight)
+        else if (player.velocity.y < -1.5f && !airFight && !controller.m_Grounded)
         {
             state = MovementState.falling;
             PlayRandomFallSounds();
