@@ -20,16 +20,14 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip[] footsteps;
     public AudioClip[] jumpSounds;
     public AudioClip[] fallSounds;
-    public AudioClip[] fightSounds;
     public float Timer;
 
     public bool isDance;
     private new CapsuleCollider2D collider;
-    private bool airFight = false;
 
     public enum MovementState
     {
-        idle, running, jumping, falling, dancing, attack
+        idle, running, jumping, falling, dancing
     };
 
     private void Start()
@@ -77,10 +75,6 @@ public class PlayerMovement : MonoBehaviour
     {
         MovementState state;
 
-        if (controller.m_Grounded)
-        {
-            airFight = false;
-        }
         if (dirX > 0f && controller.m_Grounded)
         {
             state = MovementState.running;
@@ -99,23 +93,17 @@ public class PlayerMovement : MonoBehaviour
                 state = MovementState.falling;
         }
 
-        if (player.velocity.y > 1.5f && !airFight && !controller.m_Grounded)
+        if (player.velocity.y > 1.5f && !controller.m_Grounded)
         {
             state = MovementState.jumping;
             PlayRandomJumpSounds();
         }
-        else if (player.velocity.y < -1.5f && !airFight && !controller.m_Grounded)
+        else if (player.velocity.y < -1.5f && !controller.m_Grounded)
         {
             state = MovementState.falling;
             PlayRandomFallSounds();
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            airFight = true;
-            state = MovementState.attack;
-            PlayRandomFightSounds();
-        }
         if (isDance)
         {
             state = MovementState.dancing;
@@ -151,15 +139,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Timer = Time.time + 1 / 1;
             AudioClip clip = fallSounds[Random.Range(0, fallSounds.Length)];
-            playerAudioSource.PlayOneShot(clip);
-        }
-    }
-
-    private void PlayRandomFightSounds()
-    {
-        if (fightSounds.Length != 0)
-        {
-            AudioClip clip = fightSounds[Random.Range(0, fightSounds.Length)];
             playerAudioSource.PlayOneShot(clip);
         }
     }
