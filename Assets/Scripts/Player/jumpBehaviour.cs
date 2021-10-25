@@ -17,12 +17,17 @@ public class jumpBehaviour : StateMachineBehaviour
         {
             PlayerAttack.instance.myAnim.Play("attack4");
         }
+        if (PlayerAttack.instance.isThrowing)
+        {
+            PlayerAttack.instance.myAnim.Play("throw");
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerAttack.instance.isAttacking = false;
+        PlayerAttack.instance.isThrowing = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

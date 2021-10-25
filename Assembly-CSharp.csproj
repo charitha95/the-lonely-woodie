@@ -84,16 +84,21 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\Waypoints\WaypointFollower.cs" />
+    <Compile Include="Assets\Scripts\Player\jumpBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraEffects.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
+    <Compile Include="Assets\Scripts\Player\idelBehaviour.cs" />
     <Compile Include="Assets\Scripts\Waypoints\StickyPlatform.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
     <Compile Include="Assets\Scripts\Navigation\FromStory.cs" />
     <Compile Include="Assets\Scripts\Dialogues\DialogueTrigger.cs" />
+    <Compile Include="Assets\Scripts\Player\transition1Behaviour.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
+    <Compile Include="Assets\Scripts\Player\runningBehaviour.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
     <Compile Include="Assets\Scripts\Levels\LevelComplete.cs" />
@@ -101,7 +106,10 @@
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
     <Compile Include="Assets\Scripts\Navigation\FromHome.cs" />
+    <Compile Include="Assets\Scripts\Player\transition2Behaviour.cs" />
+    <Compile Include="Assets\Scripts\Player\fallBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player\CharacterController2D.cs" />
+    <Compile Include="Assets\Scripts\Player\transition4Behaviour.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
     <Compile Include="Assets\Scripts\Dialogues\NPCNoParticleDialogue.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollw.cs" />
@@ -114,15 +122,15 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
-    <Compile Include="Assets\Scripts\Player\idelBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Player\transition1Behaviour.cs" />
-    <Compile Include="Assets\Scripts\Player\transition2Behaviour.cs" />
     <Compile Include="Assets\Scripts\Player\transition3Behaviour.cs" />
-    <Compile Include="Assets\Scripts\Player\runningBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Player\jumpBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Player\fallBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Player\transition4Behaviour.cs" />
-    <Compile Include="Assets\Scripts\Camera\CameraEffects.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyGFX.cs" />
+    <Compile Include="Assets\Scripts\UI\Health.cs" />
+    <Compile Include="Assets\Scripts\Enemy\AirBombEnemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy\BulletScript.cs" />
+    <Compile Include="Assets\Scripts\Collectables\Stone.cs" />
+    <Compile Include="Assets\Scripts\Camera\FreezeFrame.cs" />
+    <Compile Include="Assets\Scripts\Enemy\HealthbarBehaviour.cs" />
+    <Compile Include="Assets\throwTransition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -369,6 +377,9 @@
     </Reference>
     <Reference Include="System.IO.Compression.FileSystem">
       <HintPath>Library\PackageCache\com.unity.connect.share@4.2.3\Plugins\System.IO.Compression.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.19f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -837,6 +848,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
+      <Project>{C288ABC7-9964-E000-49F3-2967F299BB3C}</Project>
+      <Name>AstarPathfindingProjectEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProject.csproj">
+      <Project>{39A6351B-611D-B88A-3CC6-EF5397384D08}</Project>
+      <Name>AstarPathfindingProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="PackageToolsEditor.csproj">
+      <Project>{49C21B43-B7EC-2EE2-36CF-1AB6EF1E48EC}</Project>
+      <Name>PackageToolsEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -8,49 +8,43 @@ public class PlayerLife : MonoBehaviour
     private Animator anim;
     public AudioClip deathSound;
     private AudioSource audioSource;
-    public float duration = 1f;
-    private float pendingFreezeDuration = 0f;
-    private bool isFrozen = false;
+
+    public static Health life;
 
     // Start is called before the first frame update
     private void Start()
     {
+        life = GetComponent<Health>();
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        if (pendingFreezeDuration > 0 && !isFrozen)
-        {
-            StartCoroutine(DoFreeze());
-        }
-    }
-
-    private void Freeze()
-    {
-        pendingFreezeDuration = duration;
-    }
-
-    private IEnumerator DoFreeze()
-    {
-        isFrozen = true;
-        var original = Time.timeScale;
-        Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = original;
-        pendingFreezeDuration = 0;
-        isFrozen = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Freeze();
-            audioSource.PlayOneShot(deathSound);
+            CommonDamageBehaviour();
+        }
+        if (collision.gameObject.CompareTag("EnemyBullet"))
+        {
+            CommonDamageBehaviour();
+        }
+        if (life.health == 0)
+        {
             Die();
         }
+    }
+
+    private void CommonDamageBehaviour()
+    {
+        CameraEffects.ShakeOnce();
+        life.health = life.health - 1;
+        audioSource.PlayOneShot(deathSound);
+        anim.Play("damage");
     }
 
     private void Die()

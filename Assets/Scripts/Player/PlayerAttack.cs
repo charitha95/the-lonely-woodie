@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     public int damage;
     public Animator myAnim;
     public bool isAttacking = false;
+    public bool isThrowing = false;
     public static PlayerAttack instance;
     public AudioClip[] fightSounds;
     public AudioSource playerAudioSource;
@@ -45,8 +46,16 @@ public class PlayerAttack : MonoBehaviour
             PlayRandomFightSounds();
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
+                //if (enemiesToDamage[i].GetComponent<Enemy>().health == 1)
+                //    FreezeFrame.Freeze();
                 enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(damage);
             }
+        }
+        if (Input.GetMouseButtonDown(1) && !isThrowing)
+        {
+            isThrowing = true;
+            PlayRandomFightSounds();
+            myAnim.Play("throw");
         }
     }
 
